@@ -46,13 +46,11 @@ int main()
         for (int i = 1; i < input; i++)
         {
             arr[i] = -1;
+            arr[i] = rand() % 3;  // To generate random array of only [0,1,2]
 
-            while (arr[i] < arr[i - 1])
-            {
-                arr[i] = rand() % 3;  // To generate random array of only [0,1,2]
-            }
         }
-
+        
+        sort(arr,arr+input);
         cout << "The Sorted Array is: " << endl;
         for (int i = 0; i < input; i++)
         {
@@ -64,20 +62,20 @@ int main()
         int one = BinarySearch(arr, 1, zero + 1, input - 1);  // To count the index till which 1 is in the Array
         int two = BinarySearch(arr, 2, one + 1, input - 1);  // To count the index till which 2 is in the Array
 
-        cout << "0 ends at index: " << zero << endl;
-        cout << "1 ends at index: " << one << endl;
-        cout << "2 ends at index: " << two << endl;
+
+        int count0 = (zero != -1) ? zero + 1 : 0 ;       // To count the number of 0's in the Array
+        int count1 = (one != -1) ? one - zero : 0 ;     // To count the number of 1's in the Array
+        int count2 =  input - ( count0 + count1 );    // To count the number of 2's in the Array
+
+        cout << "Number of zero's are: " << count0 << endl;
+        cout << "Number of one's are: " << count1 << endl;
+        cout << "Number of two's are: " << count2 << endl;
         cout << endl;
 
-        int count0 = (zero != -1) ? zero + 1 : 0;       // To count the number of 0's in the Array
-
-        int count1 = (one != -1) ? one - zero : 0;     // To count the number of 1's in the Array
-
-        int count2 = (two != -1) ? input - zero - one : 0;    // To count the number of 2's in the Array
 
         cout << "Result: ";
         // Checking through the if-else and printing the result.
-        
+
         if (count0 > count1 && count0 > count2)
         {
             cout << "X" << endl;
@@ -104,7 +102,7 @@ int main()
         }
         else
         {
-            cout << -1 << endl;
+            cout << "The count for 0, 1 and 2 are same." << endl;
         }
 
         cout << endl;
